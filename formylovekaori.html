@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7eee8">
+  <title>For My Love, Kaori ♡</title>
+
+  <style>
+    :root {
+      --paper: #fffaf6;
+      --cream: #f7eee8;
+      --rose: #d88f98;
+      --rose-dark: #a95769;
+      --sage: #a9b7a0;
+      --ink: #493b3d;
+      --muted: #826f70;
+      --line: #eadbd5;
+      --shadow: 0 18px 50px rgba(104, 67, 72, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--cream);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(216, 143, 152, .16), transparent 28rem),
+        radial-gradient(circle at 90% 85%, rgba(169, 183, 160, .22), transparent 24rem),
+        var(--cream);
+    }
+
+    button,
+    input {
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app {
+      width: 100%;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      padding:
+        max(18px, env(safe-area-inset-top))
+        16px
+        max(100px, calc(90px + env(safe-area-inset-bottom)));
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 560px;
+      min-height: calc(100dvh - 40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 5px 14px;
+      color: var(--muted);
+      font: 11px/1.4 Arial, sans-serif;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .heart-mark {
+      color: var(--rose-dark);
+      font-size: 18px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 250, 246, .94);
+      border: 1px solid rgba(234, 219, 213, .9);
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      padding: clamp(25px, 6vw, 42px);
+      animation: appear .42s ease both;
+    }
+
+    .card::before,
+    .card::after {
+      content: "✿";
+      position: absolute;
+      color: rgba(169, 183, 160, .32);
+      font-size: 32px;
+      pointer-events: none;
+    }
+
+    .card::before {
+      top: 13px;
+      right: 20px;
+      transform: rotate(14deg);
+    }
+
+    .card::after {
+      bottom: 12px;
+      left: 18px;
+      transform: rotate(-18deg);
+    }
+
+    .eyebrow {
+      margin: 0 0 13px;
+      color: var(--rose-dark);
+      font: 11px/1.5 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    h1,
+    h2 {
+      font-weight: normal;
+    }
+
+    h1 {
+      font-size: clamp(36px, 10vw, 58px);
+      line-height: 1.03;
+      margin: 0 0 17px;
+      letter-spacing: -.045em;
+    }
+
+    h1 span {
+      color: var(--rose-dark);
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: clamp(28px, 7vw, 38px);
+      line-height: 1.1;
+      margin: 0 0 22px;
+      letter-spacing: -.025em;
+    }
+
+    .intro-copy {
+      max-width: 34ch;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0 auto 27px;
+    }
+
+    .intro {
+      text-align: center;
+      padding-top: clamp(38px, 10vw, 62px);
+      padding-bottom: clamp(38px, 10vw, 62px);
+    }
+
+    .flower {
+      display: block;
+      font-size: 34px;
+      margin: 0 0 20px;
+    }
+
+    .letter-content {
+      font-size: 15.5px;
+      line-height: 1.85;
+    }
+
+    .letter-content p {
+      margin: 0 0 17px;
+    }
+
+    .letter-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule {
+      width: 46px;
+      height: 1px;
+      background: var(--rose);
+      margin: 0 0 22px;
+      opacity: .8;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      min-height: 48px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease;
+      font: 600 13px/1.2 Arial, sans-serif;
+      letter-spacing: .015em;
+    }
+
+    .btn:active {
+      transform: scale(.98);
+    }
+
+    .btn-primary {
+      background: var(--rose-dark);
+      color: #fffaf8;
+      flex: 1;
+      box-shadow: 0 7px 18px rgba(169, 87, 105, .18);
+    }
+
+    .btn-primary:hover {
+      background: #91495b;
+    }
+
+    .btn-secondary {
+      color: var(--rose-dark);
+      background: #f5e8e5;
+      min-width: 92px;
+    }
+
+    .btn-quiet {
+      color: var(--muted);
+      background: transparent;
+      padding-left: 5px;
+      padding-right: 12px;
+    }
+
+    .progress-wrap {
+      margin: 18px 4px 0;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font: 11px Arial, sans-serif;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      height: 3px;
+      border-radius: 10px;
+      background: rgba(169, 87, 105, .14);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--rose-dark);
+      transition: width .3s ease;
+    }
+
+    .footer {
+      text-align: center;
+      font: 11px Arial, sans-serif;
+      color: #9a8586;
+      margin-top: 18px;
+      letter-spacing: .04em;
+    }
+
+    .final-card {
+      text-align: center;
+      padding-top: clamp(38px, 9vw, 60px);
+      padding-bottom: clamp(38px, 9vw, 60px);
+    }
+
+    .final-card .letter-content {
+      text-align: center;
+    }
+
+    .signoff {
+      margin-top: 28px;
+      color: var(--rose-dark);
+      font-style: italic;
+      font-size: 22px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Romantic background music player */
+
+    .music-player {
+      position: fixed;
+      z-index: 20;
+      left: 50%;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(460px, calc(100vw - 24px));
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 13px;
+      border: 1px solid rgba(234, 219, 213, .96);
+      border-radius: 20px;
+      background: rgba(255, 250, 246, .96);
+      box-shadow: 0 8px 28px rgba(104, 67, 72, .15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-family: Arial, sans-serif;
+    }
+
+    .music-toggle {
+      flex: 0 0 39px;
+      width: 39px;
+      height: 39px;
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f3e2e2;
+      color: var(--rose-dark);
+      font-size: 21px;
+      cursor: pointer;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .music-toggle:active {
+      transform: scale(.96);
+    }
+
+    .music-toggle.is-playing {
+      background: var(--rose-dark);
+      color: #fffaf8;
+    }
+
+    .music-info {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .music-title {
+      color: var(--ink);
+      font: 600 12px/1.25 Arial, sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .music-status {
+      color: var(--muted);
+      font: 10px/1.3 Arial, sans-serif;
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--rose-dark);
+    }
+
+    .volume-control input {
+      width: 76px;
+      height: 4px;
+      accent-color: var(--rose-dark);
+      cursor: pointer;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .app {
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+
+      .card {
+        border-radius: 21px;
+        padding: 24px 21px;
+      }
+
+      .letter-content {
+        font-size: 14.5px;
+        line-height: 1.78;
+      }
+
+      .actions {
+        gap: 6px;
+      }
+
+      .btn {
+        padding: 12px 14px;
+      }
+
+      .btn-secondary {
+        min-width: 75px;
+      }
+
+      .music-player {
+        gap: 8px;
+        padding: 9px 10px;
+      }
+
+      .volume-control {
+        gap: 4px;
+      }
+
+      .volume-control input {
+        width: 62px;
+      }
+
+      .music-title {
+        font-size: 11px;
+      }
+    }
+
+    @media (min-width: 700px) {
+      .app {
+        padding-top: 32px;
+        padding-bottom: 100px;
+      }
+
+      .shell {
+        min-height: calc(100dvh - 132px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div class="shell">
+
+      <div class="topline">
+        <span></span>
+        <span class="heart-mark"></span>
+      </div>
+
+      <!-- Welcome page -->
+
+      <section class="card intro" id="welcome">
+        <span class="flower" aria-hidden="true">🌷</span>
+
+        <p class="eyebrow">a little something from me to you</p>
+
+        <h1>
+          For my love,<br>
+          <span>Kaori</span>
+        </h1>
+
+        <p class="intro-copy">
+          There are some things I've been thinking about, and I wanted to put them into words. Take your time reading this, love.
+        </p>
+
+        <button class="btn btn-primary" id="startBtn">
+          Click here, love <span aria-hidden="true">→</span>
+        </button>
+      </section>
+
+      <!-- Letter pages -->
+
+      <section class="card hidden" id="letterCard" aria-live="polite">
+        <p class="eyebrow" id="sectionNumber"></p>
+        <h2 id="sectionTitle"></h2>
+
+        <div class="rule"></div>
+
+        <div class="letter-content" id="sectionBody"></div>
+
+        <div class="actions">
+          <button class="btn btn-quiet" id="backBtn">← Back</button>
+
+          <button class="btn btn-primary" id="nextBtn">
+            Next page <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Final page -->
+
+      <section class="card final-card hidden" id="ending" aria-live="polite">
+        <span class="flower" aria-hidden="true">🩷</span>
+
+        <p class="eyebrow">one last thing</p>
+
+        <h2 style="font-size:clamp(34px, 9vw, 48px)">
+          I love you,<br>
+          <span style="color:var(--rose-dark);font-style:italic">Kaori.</span>
+        </h2>
+
+        <div class="letter-content">
+          <p>I hope you can forgive me, love.</p>
+
+          <p>
+            I know that writing this doesn't change everything, and I don't expect it to. I just wanted you to know that I've been thinking about us and about the things I want to do better.
+          </p>
+
+          <p>
+            Thank you for being here, and for giving us the chance to keep understanding each other. I love you. Always take care of yourself, okay?
+          </p>
+        </div>
+
+        <p class="signoff">with all my love. -Lyle ♡</p>
+
+        <div class="actions" style="justify-content:center">
+          <button class="btn btn-secondary" id="restartBtn">
+            Read again ↺
+          </button>
+        </div>
+      </section>
+
+      <!-- Reading progress -->
+
+      <div class="progress-wrap hidden" id="progressWrap">
+        <div class="progress-label">
+          <span id="progressText">Page 1 of 5</span>
+          <span></span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="footer"></div>
+    </div>
+  </main>
+
+  <!-- Background music -->
+
+  <aside class="music-player" aria-label="Background music controls">
+    <audio id="bgMusic" autoplay preload="auto" loop>
+      <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support audio playback.
+    </audio>
+
+    <button
+      class="music-toggle"
+      id="muteBtn"
+      type="button"
+      aria-label="Play background music"
+      title="Play or mute music"
+    >
+      <span id="musicIcon" aria-hidden="true">♫</span>
+    </button>
+
+    <div class="music-info">
+      <span class="music-title">A little song for you</span>
+      <span class="music-status" id="musicStatus">Trying to play music...</span>
+    </div>
+
+    <label class="volume-control" for="volumeSlider">
+      <span aria-hidden="true">♪</span>
+
+      <input
+        id="volumeSlider"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.35"
+        aria-label="Music volume"
+      >
+    </label>
+  </aside>
+
+  <script>
+    const pages = [
+      {
+        title: "What I Realized",
+        paragraphs: [
+          "I realized that loving each other isn't always enough if we keep allowing our frustrations, exhaustion, and unmet expectations to get in the way of how we treat each other.",
+
+          "Looking back at what happened, I realized that somewhere along the way, we started feeling the weight of everything we were missing instead of appreciating what we still had. I missed you so much that sometimes, when we finally got to spend time together, I became too focused on the affection, attention, and quality time I had been longing for. When things didn't turn out the way I hoped, I let my disappointment affect how I acted around you, even when the last thing I wanted was to make you feel bad.",
+
+          "I also realized that having good intentions on the things I do doesn't automatically mean that you will feel loved by what I do. I can explain why I did something, but I also need to understand how it made you feel. I learned that loving you means making room for both my intentions and your feelings without treating each as if one has to invalidate the other."
+        ]
+      },
+
+      {
+        title: "What I'm Taking Accountability For",
+        paragraphs: [
+          "I'm taking accountability for the times I've allowed my emotions to influence how I treat you.",
+
+          "I know that I get overwhelmed easily, especially when I'm physically exhausted, overstimulated, or emotionally drained. I also know how much I miss you when we don't get enough time together. Those feelings are true, but I don't want them to become reasons for making you feel that I'm irritated with you, that spending time with you is a burden, or that you have to be responsible for making me feel better.",
+
+          "I'm also taking accountability for the times I've focused too much on explaining my intentions instead of first trying to understand your experience. I may do things because I care about you, but I need to remember that caring for you also means being willing to listen when something doesn't feel right to you. I don't want to use the things I do for you as a reason to dismiss the things that hurt you.",
+
+          "I recognize, too, that I have my own part in the communication problems between us. There are times when I become frustrated, keep things inside, or let my feelings build up. I can't expect us to communicate honestly if I don't consistently practice the same thing myself.",
+
+          "I'm sorry for the moments when my actions made it harder for you to feel understood, appreciated, or comfortable expressing yourself to me. I'm not saying that everything that happened was solely my fault, because I know we both have our own feelings and struggles. But I don't want to use that as an excuse to avoid looking at my own shortcomings.",
+
+          "I want to take responsibility for my part, even when it's uncomfortable, because you deserve a partner who can acknowledge his mistakes without turning every conversation into a defense of himself."
+        ]
+      },
+
+      {
+        title: "What I'm Working On",
+        paragraphs: [
+          "I'm working on becoming someone who knows how to love you without allowing my emotions to dictate how I treat you.",
+
+          "I'm learning to recognize what I'm feeling before reacting to it. When I'm frustrated, disappointed, overwhelmed, or emotionally exhausted, I want to learn how to communicate those feelings calmly instead of allowing them to show through my tone, my expressions, or the way I act around you. I want to understand my emotions without making you responsible for managing them for me.",
+
+          "I'm also working on listening without immediately defending myself. I want to be able to hear you out, understand why something hurt you, and acknowledge your feelings before explaining my own perspective. I want you to feel that you can tell me when something bothers you without having to spend so much time anticipating how I'll react.",
+
+          "Another thing I want to work on is being more intentional with the time we spend together. I don't want my longing for you to turn into frustration when things don't go according to what I expected. I want to appreciate the time we have while also learning how to communicate our needs and make time for each other more realistically.",
+
+          "Lastly, I want to become more consistent. I don't want to be someone who only reflects, apologizes, and promises to change after an argument. I want to practice these things even on ordinary days, when nothing is wrong and there's no immediate reason to make an effort.",
+
+          "I know that writing all of this doesn't mean I've changed overnight. I'm still learning, and there will probably be moments when I struggle. But I want to make a conscious effort to recognize those moments, correct myself, and do better instead of falling back into the same patterns."
+        ]
+      },
+
+      {
+        title: "What I Don't Expect From You",
+        paragraphs: [
+          "I don't expect you to have everything figured out, and I don't expect you to always know how to express what you're feeling. I know that you have your own struggles, your own exhaustion, and your own things to work through. I don't want this to become another thing you have to carry.",
+
+          "I don't expect you to forget what happened just because we're okay again. I don't want us to brush everything aside simply because we've started talking normally. I want us to be able to move forward without pretending that the things that hurt us never happened.",
+
+          "I also don't expect you to believe every word I write here just because I've taken the time to put my feelings into a website. I understand that words are easy to say, especially when emotions are high. I know that what matters more is how I treat you after this, including the moments when things aren't easy between us.",
+
+          "I'm not expecting you to respond to this in a certain way, to reassure me that everything will be okay, or to make me feel better about myself. I don't want this to become something that makes you feel obligated to forgive me or meet any expectations I might have.",
+
+          "And I don't expect either of us to become perfect partners overnight. We're both still learning. What I hope is that we can be patient enough to recognize our mistakes, honest enough to talk about them, and willing enough to work on them.",
+
+          "I'm sharing this with you because I want you to understand what's been on my mind, not because I need you to give me something in return."
+        ]
+      },
+
+      {
+        title: "What I Hope For",
+        paragraphs: [
+          "I hope we learn how to love each other better, especially during the moments when loving each other feels difficult.",
+
+          "I hope we reach a point where we can talk about what's bothering us without being afraid that an honest conversation will turn into another argument. Where we can express our feelings without feeling the need to defend every emotion, and where listening to each other doesn't mean that one of us has to lose for the other to be understood.",
+
+          "I hope we become more intentional with each other again. Not just through grand gestures or special occasions, but through the little things we sometimes overlook like checking each other, making time, showing affection, being considerate, and reminding each other that we're still choosing to be here.",
+
+          "I hope we learn to recognize each other's efforts without forgetting that we can always do better. I want to keep loving you in ways that make you feel loved, not only in ways that make sense to me. And I want to learn how to express my own needs without allowing my disappointments to overshadow the love I have for you.",
+
+          "More than anything, I hope we don't let our relationship become a place where we repeatedly hurt each other and then rely on apologies to put everything back together. I want us to build something healthier, where apologies are followed by understanding, and understanding is followed by actual change.",
+
+          "I'm grateful that, despite what happened, we're talking again. I don't take that for granted, and I don't want to mistake things feeling okay again for having everything figured out.",
+
+          "I love you. I still believe there's so much worth taking care of in what we have. And while I can't promise that I'll never make mistakes, I want to promise myself that I'll keep learning from them and making a conscious effort to do better.",
+
+          "I hope that, as we continue growing individually, we also learn how to grow together. Not because we have to get everything right, but because what we have deserves the honesty, patience, and effort that a healthy kind of love requires."
+        ]
+      }
+    ];
+
+    // Letter page elements
+    const welcome = document.getElementById("welcome");
+    const letterCard = document.getElementById("letterCard");
+    const ending = document.getElementById("ending");
+    const progressWrap = document.getElementById("progressWrap");
+
+    const sectionNumber = document.getElementById("sectionNumber");
+    const sectionTitle = document.getElementById("sectionTitle");
+    const sectionBody = document.getElementById("sectionBody");
+
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+
+    const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
+    const startBtn = document.getElementById("startBtn");
+    const restartBtn = document.getElementById("restartBtn");
+
+    let current = 0;
+
+    function renderPage() {
+      const page = pages[current];
+
+      sectionNumber.textContent =
+        `a little reflection · ${String(current + 1).padStart(2, "0")}`;
+
+      sectionTitle.textContent = page.title;
+      sectionBody.replaceChildren();
+
+      page.paragraphs.forEach(text => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        sectionBody.appendChild(p);
+      });
+
+      progressText.textContent =
+        `Page ${current + 1} of ${pages.length}`;
+
+      progressFill.style.width =
+        `${((current + 1) / pages.length) * 100}%`;
+
+      backBtn.classList.toggle("hidden", current === 0);
+
+      nextBtn.innerHTML = current === pages.length - 1
+        ? 'One last thing <span aria-hidden="true">♡</span>'
+        : 'Next page <span aria-hidden="true">→</span>';
+
+      letterCard.classList.remove("hidden");
+
+      letterCard.style.animation = "none";
+      void letterCard.offsetWidth;
+      letterCard.style.animation = "";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Music elements
+    const bgMusic = document.getElementById("bgMusic");
+    const muteBtn = document.getElementById("muteBtn");
+    const musicIcon = document.getElementById("musicIcon");
+    const musicStatus = document.getElementById("musicStatus");
+    const volumeSlider = document.getElementById("volumeSlider");
+
+    bgMusic.volume = Number(volumeSlider.value);
+
+    function updateMusicControls() {
+      const isPlaying =
+        !bgMusic.paused && !bgMusic.muted && bgMusic.volume > 0;
+
+      muteBtn.classList.toggle("is-playing", isPlaying);
+
+      muteBtn.setAttribute(
+        "aria-label",
+        isPlaying ? "Mute background music" : "Play background music"
+      );
+
+      musicIcon.textContent =
+        bgMusic.muted || bgMusic.volume === 0
+          ? "♪"
+          : (bgMusic.paused ? "♫" : "♥");
+
+      if (bgMusic.paused) {
+        musicStatus.textContent = "Music is paused";
+      } else if (bgMusic.muted || bgMusic.volume === 0) {
+        musicStatus.textContent = "Music is muted";
+      } else {
+        musicStatus.textContent = "Playing softly";
+      }
+    }
+
+    async function startMusic() {
+      try {
+        bgMusic.muted = false;
+
+        if (bgMusic.volume === 0) {
+          bgMusic.volume = Number(volumeSlider.value) || 0.35;
+        }
+
+        await bgMusic.play();
+        updateMusicControls();
+      } catch (error) {
+        musicStatus.textContent = "Tap to play music ♡";
+        updateMusicControls();
+        console.warn("Autoplay may be blocked by the browser.", error);
+      }
+    }
+
+    // Try autoplay when the page loads.
+    async function attemptAutoplay() {
+      try {
+        await bgMusic.play();
+        updateMusicControls();
+      } catch (error) {
+        musicStatus.textContent = "Tap anywhere to play ♡";
+        updateMusicControls();
+      }
+    }
+
+    // Try as soon as the document is ready.
+    if (document.readyState === "complete") {
+      attemptAutoplay();
+    } else {
+      window.addEventListener("load", attemptAutoplay, { once: true });
+    }
+
+    // Fallback for browsers that block autoplay.
+    // The first tap starts music without requiring a separate music-button tap.
+    function startMusicOnFirstInteraction() {
+      if (bgMusic.paused) {
+        startMusic();
+      }
+
+      document.removeEventListener(
+        "pointerdown",
+        startMusicOnFirstInteraction
+      );
+
+      document.removeEventListener(
+        "keydown",
+        startMusicOnFirstInteraction
+      );
+    }
+
+    document.addEventListener(
+      "pointerdown",
+      startMusicOnFirstInteraction
+    );
+
+    document.addEventListener(
+      "keydown",
+      startMusicOnFirstInteraction
+    );
+
+    // Mute or unmute.
+    muteBtn.addEventListener("click", async () => {
+      if (bgMusic.paused) {
+        await startMusic();
+      } else {
+        bgMusic.muted = !bgMusic.muted;
+        updateMusicControls();
+      }
+    });
+
+    // Volume slider.
+    volumeSlider.addEventListener("input", () => {
+      bgMusic.volume = Number(volumeSlider.value);
+
+      if (bgMusic.volume > 0 && bgMusic.muted) {
+        bgMusic.muted = false;
+      }
+
+      updateMusicControls();
+    });
+
+    bgMusic.addEventListener("play", updateMusicControls);
+    bgMusic.addEventListener("pause", updateMusicControls);
+    bgMusic.addEventListener("volumechange", updateMusicControls);
+
+    // Welcome button.
+    startBtn.addEventListener("click", () => {
+      // Also try to start music within the welcome-button interaction.
+      startMusic();
+
+      welcome.classList.add("hidden");
+      ending.classList.add("hidden");
+      progressWrap.classList.remove("hidden");
+
+      current = 0;
+      renderPage();
+    });
+
+    // Next page and final page.
+    nextBtn.addEventListener("click", () => {
+      if (current < pages.length - 1) {
+        current++;
+        renderPage();
+      } else {
+        letterCard.classList.add("hidden");
+        ending.classList.remove("hidden");
+        progressWrap.classList.add("hidden");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    // Previous page.
+    backBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        renderPage();
+      } else {
+        letterCard.classList.add("hidden");
+        progressWrap.classList.add("hidden");
+        welcome.classList.remove("hidden");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    // Restart the letter without stopping the music.
+    restartBtn.addEventListener("click", () => {
+      ending.classList.add("hidden");
+      welcome.classList.remove("hidden");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    updateMusicControls();
+  </script>
+</body>
+</html>
